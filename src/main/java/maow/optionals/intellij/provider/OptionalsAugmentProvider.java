@@ -13,7 +13,6 @@ import java.util.*;
 
 import static maow.optionals.intellij.Names.OPTIONAL;
 
-
 public final class OptionalsAugmentProvider extends PsiAugmentProvider {
     @NotNull
     @SuppressWarnings("deprecation")
@@ -26,7 +25,10 @@ public final class OptionalsAugmentProvider extends PsiAugmentProvider {
     @SuppressWarnings("unchecked")
     @Override
     protected <Psi extends PsiElement> List<Psi> getAugments(@NotNull PsiElement element, @NotNull Class<Psi> type, @Nullable String nameHint) {
-        if (!(element instanceof PsiExtensibleClass) || type != PsiMethod.class) {
+        if (
+                !(element instanceof PsiExtensibleClass) ||
+                type != PsiMethod.class
+        ) {
             return Collections.emptyList();
         }
 
