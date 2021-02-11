@@ -1,8 +1,10 @@
 package maow.optionals.intellij.provider;
 
+import com.intellij.lang.java.JavaLanguage;
 import com.intellij.psi.*;
 import com.intellij.psi.augment.PsiAugmentProvider;
 import com.intellij.psi.impl.light.LightMethodBuilder;
+import com.intellij.psi.impl.light.LightParameterListBuilder;
 import com.intellij.psi.impl.source.PsiExtensibleClass;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -82,12 +84,22 @@ public final class OptionalsAugmentProvider extends PsiAugmentProvider {
 
     private LightMethodBuilder getOverloadMethod(PsiClass clazz, PsiMethod base, List<PsiParameter> parameters) {
         final String name = base.getName();
+        final PsiType type = base.getReturnType();
+        final PsiModifierList mods = base.getModifierList();
+
         final PsiManager manager = clazz.getContainingFile().getManager();
-        final LightMethodBuilder method = new LightMethodBuilder(manager, name)
-                .setMethodReturnType(PsiType.VOID)
-                .addModifier(PsiModifier.PUBLIC)
+        final LightParameterListBuilder lightParams = new LightParameterListBuilder(manager, JavaLanguage.INSTANCE);
+        parameters.forEach(lightParams::addParameter);
+
+        return new LightMethodBuilder(
+                manager,
+                JavaLanguage.INSTANCE,
+                name,
+                lightParams,
+                mods
+        )
+                .setConstructor(base.isConstructor())
+                .setMethodReturnType(type)
                 .setContainingClass(clazz);
-        parameters.forEach(method::addParameter);
-        return method;
     }
 }
