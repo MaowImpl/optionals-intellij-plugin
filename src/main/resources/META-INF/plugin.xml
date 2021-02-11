@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idea-plugin>
+    <id>optionals-intellij</id>
+    <vendor>Maow</vendor>
+    <name>Optionals</name>
+
+    <description>IDE integration for Optionals (https://github.com/MaowImpl/Optionals)</description>
+    <category>Tools Integration</category>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.psiAugmentProvider implementation="maow.optionals.intellij.provider.OptionalsAugmentProvider"/>
+    </extensions>
+</idea-plugin>

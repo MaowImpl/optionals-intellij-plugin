@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'maow'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile 'com.github.maowimpl.optionals:optionals-annotations:1.0.0-beta.5'
+    annotationProcessor 'com.github.maowimpl.optionals:optionals:1.0.0-beta.5'
+}

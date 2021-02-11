@@ -1,0 +1,3 @@
+rootProject.name = 'optionals-intellij-plugin'
+include 'test'
+
